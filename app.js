@@ -106,6 +106,13 @@ async function main() {
   for (const el of document.querySelectorAll('[data-reading]')) el.textContent = clockString(secsLeft);
   for (const el of document.querySelectorAll('[data-score]')) el.textContent = score + ' / ' + MIDNIGHT;
 
+  const copy = $('#copy-ca');
+  if (copy) copy.addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(copy.dataset.ca); copy.textContent = 'copied'; }
+    catch { copy.textContent = 'select it'; }
+    setTimeout(() => { copy.textContent = 'copy'; }, 1500);
+  });
+
   if ($('#clock')) {
     buildDial();
     setHands(secsLeft);

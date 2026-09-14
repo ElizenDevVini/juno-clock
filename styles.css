@@ -162,3 +162,10 @@ button{font:inherit}
 .btn.ghost{background:transparent;color:var(--ink);border-color:var(--ink)}
 .calc-wide{max-width:720px;margin:0 auto}
 .calc-wide label{grid-template-columns:1.2fr 1fr}
+
+/* contract address line */
+.ca{font-size:13px;color:var(--muted);margin:10px 0 0;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.ca a{word-break:break-all}
+.ca button{font:inherit;font-size:12px;background:transparent;border:1px solid var(--ink);color:var(--ink);padding:2px 8px;cursor:pointer}
+.ca button:hover{background:var(--ink);color:var(--paper)}
+.foot a{word-break:break-all}
