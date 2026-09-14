@@ -127,7 +127,21 @@ async function main() {
     setTimeout(() => { h.style.transform = `rotate(${base}deg)`; }, 120);
   }, 1000);
 
-  const nav = $('.nav');
-  addEventListener('scroll', () => nav.classList.toggle('stuck', scrollY > 24), { passive: true });
+  const nav = $('.nav'), crawler = $('#crawler'), wrap = $('.ledger-wrap'), hero = $('#creature');
+  let lastY = 0;
+  const onScroll = () => {
+    nav.classList.toggle('stuck', scrollY > 24);
+    // hero creature drifts up as you leave, in 4px steps
+    hero.style.marginBottom = Math.floor(Math.min(scrollY, 600) * 0.18 / 4) * 4 + 'px';
+    // crawler follows reading position down the ledger, 24px at a time
+    const r = wrap.getBoundingClientRect();
+    const prog = Math.min(1, Math.max(0, (innerHeight * 0.55 - r.top) / r.height));
+    const y = Math.floor(prog * (r.height - 120) / 24) * 24;
+    crawler.style.setProperty('--y', y + 'px');
+    crawler.style.setProperty('--dir', scrollY >= lastY ? 1 : -1);
+    lastY = scrollY;
+  };
+  addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
 }
 main();

@@ -12,7 +12,7 @@
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.55 var(--mono);-webkit-font-smoothing:antialiased}
+body{margin:0;background:var(--paper);position:relative;color:var(--ink);font:16px/1.55 var(--mono);-webkit-font-smoothing:antialiased}
 a{color:inherit}
 img{max-width:100%;display:block}
 h1,h2,h3{font-family:var(--display);font-weight:400;margin:0;letter-spacing:-.01em}
@@ -115,3 +115,31 @@ table.rules td.w{font-family:var(--display);font-size:1.7rem;line-height:1;width
   .creature{animation:none}
   .ledger li{transition:none;opacity:1;transform:none}
 }
+
+/* paper grain over everything, static */
+body::before{content:"";position:fixed;inset:0;z-index:20;pointer-events:none;opacity:.07;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* 1-bit checker edge on alternate sections */
+.sec.alt{position:relative;border:0}
+.sec.alt::before,.sec.alt::after{content:"";position:absolute;left:0;right:0;height:8px;background:repeating-conic-gradient(var(--ink) 0 25%,transparent 0 50%) 0 0/8px 8px;opacity:.28}
+.sec.alt::before{top:0}
+.sec.alt::after{bottom:0}
+
+/* creature that crawls down the record as you read it */
+.ledger-wrap{position:relative}
+.crawler{position:absolute;left:-150px;top:0;width:110px;transform:translateY(var(--y,0px)) scaleX(var(--dir,1));animation:crawl 3s steps(4) infinite;filter:drop-shadow(2px 2px 0 var(--ink));pointer-events:none}
+.ledger{position:relative;background:transparent}
+
+/* one peeking over the calculator */
+.calc{position:relative}
+.peek{position:absolute;right:-24px;top:-58px;width:96px;transform:scaleX(-1) rotate(8deg);animation:crawl 4s steps(4) infinite;filter:drop-shadow(2px 2px 0 var(--ink));pointer-events:none}
+
+/* footer march */
+.foot{position:relative;overflow:hidden;padding-top:72px}
+.march{position:absolute;top:8px;left:0;right:0;height:48px;pointer-events:none}
+.march img{position:absolute;top:0;left:0;width:64px;animation:march 36s steps(90) infinite,crawl 2s steps(4) infinite;filter:drop-shadow(2px 2px 0 var(--ink))}
+@keyframes march{from{left:-80px}to{left:100%}}
+
+@media (max-width:1300px){.crawler{left:auto;right:-10px;width:80px}}
+@media (max-width:900px){.crawler{display:none}.peek{width:72px;top:-50px;right:-8px}}
+@media (prefers-reduced-motion:reduce){.crawler,.peek,.march img{animation:none}}

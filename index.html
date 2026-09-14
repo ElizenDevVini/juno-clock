@@ -68,7 +68,10 @@
       <h2>The record</h2>
       <p class="sub">Every entry, newest first. Weight, and what it did to the clock.</p>
     </div>
-    <ol class="ledger" id="ledger"></ol>
+    <div class="ledger-wrap">
+      <img class="crawler" id="crawler" src="creature.png" alt="">
+      <ol class="ledger" id="ledger"></ol>
+    </div>
   </div>
 </section>
 
@@ -104,6 +107,7 @@
         <p class="status">Status: the JUNO contract is not deployed. The mechanics on this page are the design. The numbers in the calculator are a model, not a quote.</p>
       </div>
       <form class="calc" id="calc" onsubmit="return false">
+        <img class="peek" src="creature.png" alt="">
         <label>Your JUNO<input type="number" id="c-hold" value="1000000" min="0" step="1000"></label>
         <label>Total supply<input type="number" id="c-supply" value="1000000000" min="1" step="1000000"></label>
         <label>Pot size, USD<input type="number" id="c-pot" value="50000" min="0" step="1000"></label>
@@ -155,6 +159,7 @@
 </main>
 
 <footer class="foot">
+  <div class="march" aria-hidden="true"><img src="creature.png" alt=""></div>
   <div class="wrap">
     <span>Juno Clock</span>
     <span>Record: <a href="https://github.com/ElizenDevVini/juno-clock/blob/main/events.json">events.json</a></span>
