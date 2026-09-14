@@ -2,7 +2,7 @@ import { C } from './config.js';
 import { loadViem, createWallet } from './wallet.js';
 
 const $ = (s) => document.querySelector(s);
-const LIVE = Boolean(C.clock && C.juno);
+const LIVE = Boolean(C.clock);
 
 const CLOCK_ABI = [
   { type: 'function', name: 'score', stateMutability: 'view', inputs: [], outputs: [{ type: 'uint256' }] },
@@ -90,8 +90,12 @@ async function main() {
       session = s;
       $('#w-connect').textContent = s.owner.slice(0, 6) + '…' + s.owner.slice(-4);
       $('#w-panel').hidden = false;
-      if (!LIVE) return say('Wallet connected. The JUNO and clock contracts are not deployed yet, so burn and claim are off.');
       decimals = await s.pub.readContract({ address: C.juno, abi: ERC20_ABI, functionName: 'decimals' });
+      if (!LIVE) {
+        const bal = await s.pub.readContract({ address: C.juno, abi: ERC20_ABI, functionName: 'balanceOf', args: [s.owner] });
+        $('#w-bal').textContent = fmt(bal) + ' JUNO';
+        return say('Wallet connected. The clock contract is not deployed yet, so burn and claim are off.');
+      }
       $('#w-burn').disabled = false;
       await refresh();
       setInterval(() => refresh().catch(() => {}), 20000);

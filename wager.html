@@ -33,10 +33,10 @@
     <div class="wager-grid">
       <div class="prose">
         <p>You wager by burning JUNO. The tokens go to the dead address and never come back. What you get in return is a share of the pot, sized by how much you burned against everything anyone has burned.</p>
-        <p>The pot is filled by trading fees on JUNO, paid into the clock contract in BNB. It does not pay on a schedule. It pays when the clock moves.</p>
+        <p>The pot is filled by trading fees on JUNO, paid into the clock contract in ETH. It does not pay on a schedule. It pays when the clock moves.</p>
         <p>Each new entry in the record releases a slice of the pot equal to the seconds it advanced the clock, divided by the seconds that were left. A weight 4 entry at 23:56 releases a much bigger slice than the same entry would have at 23:35. Burners who were in before the entry split that slice. Burn after it and you only share what comes next. At midnight the whole pot pays out and the clock is retired.</p>
         <p>Rewards accrue to your address and you claim them whenever you like. There is no way to unburn. Supply only goes down.</p>
-        <p class="status">Status: the JUNO and clock contracts are not deployed. You can connect a wallet now. Burn and claim switch on when the addresses land. The calculator below is a model.</p>
+        <p class="status">Status: JUNO is live on Robinhood Chain at <a href="https://robinhoodchain.blockscout.com/token/0x2bf8ce7d31f5856aca4bd8d4e3a99e336a0c1e18">0x2bf8…1e18</a>. The clock contract is not deployed yet. You can connect a wallet now. Burn and claim switch on when it lands. The calculator below is a model.</p>
       </div>
       <div class="wallet">
         <img class="peek" src="creature.png" alt="">
@@ -68,7 +68,7 @@
     <form class="calc calc-wide" id="calc" onsubmit="return false">
       <label>JUNO you burn<input type="number" id="c-hold" value="1000000" min="0" step="1000"></label>
       <label>JUNO burned by everyone<input type="number" id="c-supply" value="50000000" min="1" step="1000000"></label>
-      <label>Pot size, BNB<input type="number" id="c-pot" value="20" min="0" step="1"></label>
+      <label>Pot size, ETH<input type="number" id="c-pot" value="20" min="0" step="1"></label>
       <label>Next entry weight<select id="c-w"><option>1</option><option>2</option><option selected>3</option><option>4</option><option>5</option></select></label>
       <div class="calc-out">
         <div><span class="k">Slice released</span><span class="v" id="o-slice">0%</span></div>
