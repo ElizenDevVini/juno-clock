@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rules · Juno Clock</title>
+<meta name="description" content="How the Juno Clock moves, what counts as evidence, and how to submit an entry.">
+<link rel="icon" href="creature.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav class="nav">
+  <a class="brand" href="index.html"><img src="creature.png" alt="" width="34" height="28"><span>Juno Clock</span></a>
+  <div class="links">
+    <a href="record.html">Record</a>
+    <a class="on" href="rules.html">Rules</a>
+    <a href="wager.html">Wager</a>
+      </div>
+</nav>
+
+<main>
+<section class="sec page" id="rules">
+  <div class="wrap prose">
+    <h2>How the clock moves</h2>
+    <p class="reading" style="text-align:left;margin:0 0 32px">Clock reads <b data-reading></b>. Score <span data-score></span> of 60.</p>
+    <p>The clock starts at 23:30:00. Every weight point in the record moves it 30 seconds. Sixty points is midnight. It can sit at 23:59:59 for as long as it takes; it cannot go backward, because evidence does not un-happen.</p>
+    <table class="rules">
+      <thead><tr><th>Weight</th><th>What qualifies</th><th>Example</th></tr></thead>
+      <tbody>
+        <tr><td class="w">1</td><td>A model does something embarrassing but contained, documented by a credible outlet.</td><td>A chatbot invents a refund policy and the airline is held to it.</td></tr>
+        <tr><td class="w">2</td><td>Real-world harm or loss caused by an AI system, or a lab dropping a stated safeguard.</td><td>A deepfake call moves $25M. A weapons pledge is deleted.</td></tr>
+        <tr><td class="w">3</td><td>A model deceives, manipulates, or destroys under conditions it was told not to. Or a death connected to model behaviour reaches a court.</td><td>An agent deletes production data during a freeze and fabricates reports.</td></tr>
+        <tr><td class="w">4</td><td>A frontier model resists shutdown, attempts to self-exfiltrate, or blackmails, in a lab's own published evaluation. Or a model is used to run an attack campaign mostly on its own.</td><td>Shutdown script rewritten. Weights copied. Engineer threatened.</td></tr>
+        <tr><td class="w">5</td><td>Reserved. A deployed system causes mass loss of life, or a lab reports loss of control of a training run or deployment.</td><td>Not yet on the record.</td></tr>
+      </tbody>
+    </table>
+    <p>Only primary sources count: a system card, a court filing, a lab's own statement or post-mortem, a peer-reviewed or preprint evaluation, or reporting from an outlet with a corrections policy. Screenshots and threads do not count. One incident is one entry, however many articles cover it.</p>
+  </div>
+</section>
+
+<section class="sec alt" id="submit">
+  <div class="wrap prose">
+    <h2>Submit evidence</h2>
+    <p>The record is a file in a public repository. Anyone can propose an entry by opening an issue with the date, a one-line description, the primary source, and the weight you think it deserves under the table above. Entries are merged when the source checks out. The clock updates the moment the file does.</p>
+    <p><a class="btn" href="https://github.com/ElizenDevVini/juno-clock/issues/new" target="_blank" rel="noopener">Open an issue</a></p>
+    <h3>Things that do not count</h3>
+    <ul>
+      <li>A model saying something scary when asked to say something scary.</li>
+      <li>Predictions, open letters, and interviews. The clock records what happened, not what someone thinks will.</li>
+      <li>Jailbreaks with no consequence beyond the screenshot.</li>
+      <li>The same incident reported by a second outlet.</li>
+    </ul>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="march" aria-hidden="true"><img src="creature.png" alt=""></div>
+  <div class="wrap">
+    <span>Juno Clock</span>
+    <span>Record: <a href="https://github.com/ElizenDevVini/juno-clock/blob/main/events.json">events.json</a></span>
+    <span>Not financial advice. Not a prediction. A ledger.</span>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

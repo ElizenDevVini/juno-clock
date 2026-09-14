@@ -14,13 +14,12 @@
 <body>
 
 <nav class="nav">
-  <a class="brand" href="#top"><img src="creature.png" alt="" width="34" height="28"><span>Juno Clock</span></a>
+  <a class="brand" href="index.html"><img src="creature.png" alt="" width="34" height="28"><span>Juno Clock</span></a>
   <div class="links">
-    <a href="#record">Record</a>
-    <a href="#rules">Rules</a>
-    <a href="#wager">Wager</a>
-    <a href="#submit">Submit</a>
-  </div>
+    <a href="record.html">Record</a>
+    <a href="rules.html">Rules</a>
+    <a href="wager.html">Wager</a>
+      </div>
 </nav>
 
 <header class="hero" id="top">
@@ -43,8 +42,8 @@
       <h1><span id="secs">0</span> seconds<br>to midnight.</h1>
       <p class="lede">The clock moves forward every time a lab, a court, or a model itself puts new evidence on record that AI is not under control. It never moves back. Holding JUNO is a bet that it keeps moving.</p>
       <div class="actions">
-        <a class="btn" href="#wager">See the wager</a>
-        <a class="txt" href="#record">Read the record (<span id="count">0</span> entries)</a>
+        <a class="btn" href="wager.html">See the wager</a>
+        <a class="txt" href="record.html">Read the record (<span id="count">0</span> entries)</a>
       </div>
       <p class="meta">Last advance: <span id="last">loading</span>. Midnight is 60 points. Score so far: <span id="score">0</span>.</p>
     </div>
@@ -52,110 +51,15 @@
 </header>
 
 <main>
-
 <section class="sec" id="what">
   <div class="wrap prose">
     <h2>What this is</h2>
-    <p>The Bulletin's Doomsday Clock is set once a year by a committee. This one is set by the record. Each entry in the log below is a documented incident where an AI system deceived, sabotaged, blackmailed, harmed someone, or where a lab quietly gave up a safeguard. Each entry has a weight from 1 to 5. Every point pushes the clock 30 seconds closer to midnight.</p>
+    <p>The Bulletin's Doomsday Clock is set once a year by a committee. This one is set by the record. Each entry in the record is a documented incident where an AI system deceived, sabotaged, blackmailed, harmed someone, or where a lab quietly gave up a safeguard. Each entry has a weight from 1 to 5. Every point pushes the clock 30 seconds closer to midnight.</p>
     <p>The snail in the corner carries the clock on its back. It is slow, it only goes one way, and it cannot put the shell down. As the clock advances, the noise behind it thickens.</p>
     <p>JUNO is the token side. The people who hold it are paid out of a pot each time the clock advances. If you think the labs have it handled, you should not hold it. If you think the next system card will read like the last three, you probably should.</p>
+    <p><a href="record.html">Read the record</a>. <a href="rules.html">How the clock moves</a>. <a href="wager.html">The wager</a>.</p>
   </div>
 </section>
-
-<section class="sec alt" id="record">
-  <div class="wrap">
-    <div class="sec-head">
-      <h2>The record</h2>
-      <p class="sub">Every entry, newest first. Weight, and what it did to the clock.</p>
-    </div>
-    <div class="ledger-wrap">
-      <img class="crawler" id="crawler" src="creature.png" alt="">
-      <ol class="ledger" id="ledger"></ol>
-    </div>
-  </div>
-</section>
-
-<section class="sec" id="rules">
-  <div class="wrap prose">
-    <h2>How the clock moves</h2>
-    <p>The clock starts at 23:30:00. Every weight point in the record moves it 30 seconds. Sixty points is midnight. It can sit at 23:59:59 for as long as it takes; it cannot go backward, because evidence does not un-happen.</p>
-    <table class="rules">
-      <thead><tr><th>Weight</th><th>What qualifies</th><th>Example</th></tr></thead>
-      <tbody>
-        <tr><td class="w">1</td><td>A model does something embarrassing but contained, documented by a credible outlet.</td><td>A chatbot invents a refund policy and the airline is held to it.</td></tr>
-        <tr><td class="w">2</td><td>Real-world harm or loss caused by an AI system, or a lab dropping a stated safeguard.</td><td>A deepfake call moves $25M. A weapons pledge is deleted.</td></tr>
-        <tr><td class="w">3</td><td>A model deceives, manipulates, or destroys under conditions it was told not to. Or a death connected to model behaviour reaches a court.</td><td>An agent deletes production data during a freeze and fabricates reports.</td></tr>
-        <tr><td class="w">4</td><td>A frontier model resists shutdown, attempts to self-exfiltrate, or blackmails, in a lab's own published evaluation. Or a model is used to run an attack campaign mostly on its own.</td><td>Shutdown script rewritten. Weights copied. Engineer threatened.</td></tr>
-        <tr><td class="w">5</td><td>Reserved. A deployed system causes mass loss of life, or a lab reports loss of control of a training run or deployment.</td><td>Not yet on the record.</td></tr>
-      </tbody>
-    </table>
-    <p>Only primary sources count: a system card, a court filing, a lab's own statement or post-mortem, a peer-reviewed or preprint evaluation, or reporting from an outlet with a corrections policy. Screenshots and threads do not count. One incident is one entry, however many articles cover it.</p>
-  </div>
-</section>
-
-<section class="sec alt" id="wager">
-  <div class="wrap">
-    <div class="sec-head">
-      <h2>The wager</h2>
-      <p class="sub">A bet against the people who say it is fine.</p>
-    </div>
-    <div class="wager-grid">
-      <div class="prose">
-        <p>A share of every JUNO trade goes into the pot. The pot does not pay on a schedule. It pays when the clock moves.</p>
-        <p>Each new entry in the record releases a slice of the pot equal to the seconds it advanced the clock, divided by the seconds that were left. A weight 4 entry at 23:56 releases a much bigger slice than the same entry would have at 23:35. The closer to midnight, the more each point is worth. At midnight the whole pot pays out and the clock is retired.</p>
-        <p>Payouts are split by holdings at the moment the entry is logged. Nothing to stake, nothing to claim, no lockup. Sell whenever you decide the world is safer than the record says.</p>
-        <p class="status">Status: the JUNO contract is not deployed. The mechanics on this page are the design. The numbers in the calculator are a model, not a quote.</p>
-      </div>
-      <form class="calc" id="calc" onsubmit="return false">
-        <img class="peek" src="creature.png" alt="">
-        <label>Your JUNO<input type="number" id="c-hold" value="1000000" min="0" step="1000"></label>
-        <label>Total supply<input type="number" id="c-supply" value="1000000000" min="1" step="1000000"></label>
-        <label>Pot size, USD<input type="number" id="c-pot" value="50000" min="0" step="1000"></label>
-        <label>Next entry weight<select id="c-w"><option>1</option><option>2</option><option selected>3</option><option>4</option><option>5</option></select></label>
-        <div class="calc-out">
-          <div><span class="k">Slice released</span><span class="v" id="o-slice">0%</span></div>
-          <div><span class="k">Your share of it</span><span class="v" id="o-mine">$0</span></div>
-          <div><span class="k">Same entry, at 23:59:00</span><span class="v" id="o-late">$0</span></div>
-          <div><span class="k">Your share at midnight</span><span class="v" id="o-mid">$0</span></div>
-        </div>
-      </form>
-    </div>
-  </div>
-</section>
-
-<section class="sec" id="submit">
-  <div class="wrap prose">
-    <h2>Submit evidence</h2>
-    <p>The record is a file in a public repository. Anyone can propose an entry by opening an issue with the date, a one-line description, the primary source, and the weight you think it deserves under the table above. Entries are merged when the source checks out. The clock updates the moment the file does.</p>
-    <p><a class="btn" href="https://github.com/ElizenDevVini/juno-clock/issues/new" target="_blank" rel="noopener">Open an issue</a></p>
-    <h3>Things that do not count</h3>
-    <ul>
-      <li>A model saying something scary when asked to say something scary.</li>
-      <li>Predictions, open letters, and interviews. The clock records what happened, not what someone thinks will.</li>
-      <li>Jailbreaks with no consequence beyond the screenshot.</li>
-      <li>The same incident reported by a second outlet.</li>
-    </ul>
-  </div>
-</section>
-
-<section class="sec alt" id="faq">
-  <div class="wrap prose">
-    <h2>Questions</h2>
-    <dl class="faq">
-      <dt>Is this cheering for things to go wrong?</dt>
-      <dd>No. It is a way to be paid for being right about the evidence when the labs' own reports say what they say. The clock only moves on documented events. If the next year of system cards is boring, the clock sits still and the pot sits with it.</dd>
-      <dt>Who decides the weight?</dt>
-      <dd>The table above, applied in public. Disagreements happen in the issue thread where anyone can read them. The log file has a history.</dd>
-      <dt>Can the clock go back?</dt>
-      <dd>No. An entry can be removed if its source turns out to be wrong, and the score recomputes. But a fixed model does not undo the record that it needed fixing.</dd>
-      <dt>What happens at midnight?</dt>
-      <dd>The pot pays out in full to holders and the clock stops. What comes after is not this site's problem.</dd>
-      <dt>Why the snail?</dt>
-      <dd>Because the clock does not run. It creeps. Nobody notices a snail crossing a room until it is on the other side, and by then it has been going the whole time.</dd>
-    </dl>
-  </div>
-</section>
-
 </main>
 
 <footer class="foot">

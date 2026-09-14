@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The record · Juno Clock</title>
+<meta name="description" content="Every documented incident on the Juno Clock record, newest first, with its weight and what it did to the clock.">
+<link rel="icon" href="creature.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav class="nav">
+  <a class="brand" href="index.html"><img src="creature.png" alt="" width="34" height="28"><span>Juno Clock</span></a>
+  <div class="links">
+    <a class="on" href="record.html">Record</a>
+    <a href="rules.html">Rules</a>
+    <a href="wager.html">Wager</a>
+      </div>
+</nav>
+
+<main>
+<section class="sec page" id="record">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>The record</h2>
+      <p class="sub">Every entry, newest first. Weight, and what it did to the clock.</p>
+    </div>
+    <p class="reading">Clock reads <b data-reading></b>. Score <span data-score></span> of 60.</p>
+    <div class="ledger-wrap">
+      <img class="crawler" id="crawler" src="creature.png" alt="">
+      <ol class="ledger" id="ledger"></ol>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="march" aria-hidden="true"><img src="creature.png" alt=""></div>
+  <div class="wrap">
+    <span>Juno Clock</span>
+    <span>Record: <a href="https://github.com/ElizenDevVini/juno-clock/blob/main/events.json">events.json</a></span>
+    <span>Not financial advice. Not a prediction. A ledger.</span>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

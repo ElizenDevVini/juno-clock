@@ -143,3 +143,11 @@ body::before{content:"";position:fixed;inset:0;z-index:20;pointer-events:none;op
 @media (max-width:1300px){.crawler{left:auto;right:-10px;width:80px}}
 @media (max-width:900px){.crawler{display:none}.peek{width:72px;top:-50px;right:-8px}}
 @media (prefers-reduced-motion:reduce){.crawler,.peek,.march img{animation:none}}
+
+/* inner pages */
+.sec.page{padding-top:160px}
+.sec.page .sec-head{margin-bottom:56px}
+.sec.page .prose h2{margin-bottom:1.2rem}
+.reading{font-size:13px;color:var(--muted);text-align:center;margin:-40px 0 48px}
+.reading b{font-family:var(--display);font-weight:400;font-size:1.2rem;color:var(--ink);letter-spacing:.02em}
+.nav .links a.on::after{transform:scaleX(1)}

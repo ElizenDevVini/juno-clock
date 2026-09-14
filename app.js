@@ -96,52 +96,63 @@ function calc(secsLeft) {
 }
 
 async function main() {
-  buildDial();
   const events = await fetch('events.json').then((r) => r.json());
   const score = events.reduce((a, e) => a + e.w, 0);
   const secsLeft = Math.max(1, START - score * PER_POINT);
   const latest = [...events].sort((a, b) => b.date.localeCompare(a.date))[0];
+  const nav = $('.nav');
+  addEventListener('scroll', () => nav.classList.toggle('stuck', scrollY > 24), { passive: true });
 
-  setHands(secsLeft);
-  $('#readout').textContent = clockString(secsLeft);
-  $('#secs').textContent = secsLeft;
-  $('#count').textContent = events.length;
-  $('#score').textContent = score + ' / ' + MIDNIGHT;
-  $('#last').textContent = fmtDate(latest.date);
-  document.title = clockString(secsLeft) + ' · Juno Clock';
+  for (const el of document.querySelectorAll('[data-reading]')) el.textContent = clockString(secsLeft);
+  for (const el of document.querySelectorAll('[data-score]')) el.textContent = score + ' / ' + MIDNIGHT;
 
-  renderLedger(events, secsLeft);
-  calc(secsLeft);
-  $('#calc').addEventListener('input', () => calc(secsLeft));
+  if ($('#clock')) {
+    buildDial();
+    setHands(secsLeft);
+    $('#readout').textContent = clockString(secsLeft);
+    $('#secs').textContent = secsLeft;
+    $('#count').textContent = events.length;
+    $('#score').textContent = score + ' / ' + MIDNIGHT;
+    $('#last').textContent = fmtDate(latest.date);
+    document.title = clockString(secsLeft) + ' · Juno Clock';
 
-  dither(secsLeft);
-  let last = 0;
-  const loop = (ts) => { if (ts - last > 260) { dither(secsLeft); last = ts; } requestAnimationFrame(loop); };
-  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) requestAnimationFrame(loop);
-  addEventListener('resize', () => dither(secsLeft));
+    dither(secsLeft);
+    let last = 0;
+    const loop = (ts) => { if (ts - last > 260) { dither(secsLeft); last = ts; } requestAnimationFrame(loop); };
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) requestAnimationFrame(loop);
+    addEventListener('resize', () => dither(secsLeft));
 
-  // second hand twitches once a second but never gains: the clock only moves on evidence
-  setInterval(() => {
-    const h = $('#hand-s'); const base = ((43200 - secsLeft) % 60) * 6;
-    h.style.transform = `rotate(${base + 2}deg)`;
-    setTimeout(() => { h.style.transform = `rotate(${base}deg)`; }, 120);
-  }, 1000);
+    // second hand twitches once a second but never gains: the clock only moves on evidence
+    setInterval(() => {
+      const h = $('#hand-s'); const base = ((43200 - secsLeft) % 60) * 6;
+      h.style.transform = `rotate(${base + 2}deg)`;
+      setTimeout(() => { h.style.transform = `rotate(${base}deg)`; }, 120);
+    }, 1000);
 
-  const nav = $('.nav'), crawler = $('#crawler'), wrap = $('.ledger-wrap'), hero = $('#creature');
-  let lastY = 0;
-  const onScroll = () => {
-    nav.classList.toggle('stuck', scrollY > 24);
-    // hero creature drifts up as you leave, in 4px steps
-    hero.style.marginBottom = Math.floor(Math.min(scrollY, 600) * 0.18 / 4) * 4 + 'px';
-    // crawler follows reading position down the ledger, 24px at a time
-    const r = wrap.getBoundingClientRect();
-    const prog = Math.min(1, Math.max(0, (innerHeight * 0.55 - r.top) / r.height));
-    const y = Math.floor(prog * (r.height - 120) / 24) * 24;
-    crawler.style.setProperty('--y', y + 'px');
-    crawler.style.setProperty('--dir', scrollY >= lastY ? 1 : -1);
-    lastY = scrollY;
-  };
-  addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
+    const hero = $('#creature');
+    addEventListener('scroll', () => {
+      hero.style.marginBottom = Math.floor(Math.min(scrollY, 600) * 0.18 / 4) * 4 + 'px';
+    }, { passive: true });
+  }
+
+  if ($('#ledger')) {
+    renderLedger(events, secsLeft);
+    const crawler = $('#crawler'), wrap = $('.ledger-wrap');
+    let lastY = 0;
+    const onScroll = () => {
+      const r = wrap.getBoundingClientRect();
+      const prog = Math.min(1, Math.max(0, (innerHeight * 0.55 - r.top) / r.height));
+      crawler.style.setProperty('--y', Math.floor(prog * (r.height - 120) / 24) * 24 + 'px');
+      crawler.style.setProperty('--dir', scrollY >= lastY ? 1 : -1);
+      lastY = scrollY;
+    };
+    addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
+
+  if ($('#calc')) {
+    calc(secsLeft);
+    $('#calc').addEventListener('input', () => calc(secsLeft));
+  }
 }
 main();

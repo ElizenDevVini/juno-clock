@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The wager · Juno Clock</title>
+<meta name="description" content="How JUNO holders are paid when the clock moves, with a calculator.">
+<link rel="icon" href="creature.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav class="nav">
+  <a class="brand" href="index.html"><img src="creature.png" alt="" width="34" height="28"><span>Juno Clock</span></a>
+  <div class="links">
+    <a href="record.html">Record</a>
+    <a href="rules.html">Rules</a>
+    <a class="on" href="wager.html">Wager</a>
+      </div>
+</nav>
+
+<main>
+<section class="sec page" id="wager">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>The wager</h2>
+      <p class="sub">A bet against the people who say it is fine.</p>
+    </div>
+    <p class="reading">Clock reads <b data-reading></b>. Score <span data-score></span> of 60.</p>
+    <div class="wager-grid">
+      <div class="prose">
+        <p>A share of every JUNO trade goes into the pot. The pot does not pay on a schedule. It pays when the clock moves.</p>
+        <p>Each new entry in the record releases a slice of the pot equal to the seconds it advanced the clock, divided by the seconds that were left. A weight 4 entry at 23:56 releases a much bigger slice than the same entry would have at 23:35. The closer to midnight, the more each point is worth. At midnight the whole pot pays out and the clock is retired.</p>
+        <p>Payouts are split by holdings at the moment the entry is logged. Nothing to stake, nothing to claim, no lockup. Sell whenever you decide the world is safer than the record says.</p>
+        <p class="status">Status: the JUNO contract is not deployed. The mechanics on this page are the design. The numbers in the calculator are a model, not a quote.</p>
+      </div>
+      <form class="calc" id="calc" onsubmit="return false">
+        <img class="peek" src="creature.png" alt="">
+        <label>Your JUNO<input type="number" id="c-hold" value="1000000" min="0" step="1000"></label>
+        <label>Total supply<input type="number" id="c-supply" value="1000000000" min="1" step="1000000"></label>
+        <label>Pot size, USD<input type="number" id="c-pot" value="50000" min="0" step="1000"></label>
+        <label>Next entry weight<select id="c-w"><option>1</option><option>2</option><option selected>3</option><option>4</option><option>5</option></select></label>
+        <div class="calc-out">
+          <div><span class="k">Slice released</span><span class="v" id="o-slice">0%</span></div>
+          <div><span class="k">Your share of it</span><span class="v" id="o-mine">$0</span></div>
+          <div><span class="k">Same entry, at 23:59:00</span><span class="v" id="o-late">$0</span></div>
+          <div><span class="k">Your share at midnight</span><span class="v" id="o-mid">$0</span></div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="sec alt" id="faq">
+  <div class="wrap prose">
+    <h2>Questions</h2>
+    <dl class="faq">
+      <dt>Is this cheering for things to go wrong?</dt>
+      <dd>No. It is a way to be paid for being right about the evidence when the labs' own reports say what they say. The clock only moves on documented events. If the next year of system cards is boring, the clock sits still and the pot sits with it.</dd>
+      <dt>Who decides the weight?</dt>
+      <dd>The <a href="rules.html">weight table</a>, applied in public. Disagreements happen in the issue thread where anyone can read them. The log file has a history.</dd>
+      <dt>Can the clock go back?</dt>
+      <dd>No. An entry can be removed if its source turns out to be wrong, and the score recomputes. But a fixed model does not undo the record that it needed fixing.</dd>
+      <dt>What happens at midnight?</dt>
+      <dd>The pot pays out in full to holders and the clock stops. What comes after is not this site's problem.</dd>
+      <dt>Why the snail?</dt>
+      <dd>Because the clock does not run. It creeps. Nobody notices a snail crossing a room until it is on the other side, and by then it has been going the whole time.</dd>
+    </dl>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="march" aria-hidden="true"><img src="creature.png" alt=""></div>
+  <div class="wrap">
+    <span>Juno Clock</span>
+    <span>Record: <a href="https://github.com/ElizenDevVini/juno-clock/blob/main/events.json">events.json</a></span>
+    <span>Not financial advice. Not a prediction. A ledger.</span>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
