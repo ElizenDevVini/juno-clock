@@ -32,25 +32,51 @@
     <p class="reading">Clock reads <b data-reading></b>. Score <span data-score></span> of 60.</p>
     <div class="wager-grid">
       <div class="prose">
-        <p>A share of every JUNO trade goes into the pot. The pot does not pay on a schedule. It pays when the clock moves.</p>
-        <p>Each new entry in the record releases a slice of the pot equal to the seconds it advanced the clock, divided by the seconds that were left. A weight 4 entry at 23:56 releases a much bigger slice than the same entry would have at 23:35. The closer to midnight, the more each point is worth. At midnight the whole pot pays out and the clock is retired.</p>
-        <p>Payouts are split by holdings at the moment the entry is logged. Nothing to stake, nothing to claim, no lockup. Sell whenever you decide the world is safer than the record says.</p>
-        <p class="status">Status: the JUNO contract is not deployed. The mechanics on this page are the design. The numbers in the calculator are a model, not a quote.</p>
+        <p>You wager by burning JUNO. The tokens go to the dead address and never come back. What you get in return is a share of the pot, sized by how much you burned against everything anyone has burned.</p>
+        <p>The pot is filled by trading fees on JUNO, paid into the clock contract in BNB. It does not pay on a schedule. It pays when the clock moves.</p>
+        <p>Each new entry in the record releases a slice of the pot equal to the seconds it advanced the clock, divided by the seconds that were left. A weight 4 entry at 23:56 releases a much bigger slice than the same entry would have at 23:35. Burners who were in before the entry split that slice. Burn after it and you only share what comes next. At midnight the whole pot pays out and the clock is retired.</p>
+        <p>Rewards accrue to your address and you claim them whenever you like. There is no way to unburn. Supply only goes down.</p>
+        <p class="status">Status: the JUNO and clock contracts are not deployed. You can connect a wallet now. Burn and claim switch on when the addresses land. The calculator below is a model.</p>
       </div>
-      <form class="calc" id="calc" onsubmit="return false">
+      <div class="wallet">
         <img class="peek" src="creature.png" alt="">
-        <label>Your JUNO<input type="number" id="c-hold" value="1000000" min="0" step="1000"></label>
-        <label>Total supply<input type="number" id="c-supply" value="1000000000" min="1" step="1000000"></label>
-        <label>Pot size, USD<input type="number" id="c-pot" value="50000" min="0" step="1000"></label>
-        <label>Next entry weight<select id="c-w"><option>1</option><option>2</option><option selected>3</option><option>4</option><option>5</option></select></label>
-        <div class="calc-out">
-          <div><span class="k">Slice released</span><span class="v" id="o-slice">0%</span></div>
-          <div><span class="k">Your share of it</span><span class="v" id="o-mine">$0</span></div>
-          <div><span class="k">Same entry, at 23:59:00</span><span class="v" id="o-late">$0</span></div>
-          <div><span class="k">Your share at midnight</span><span class="v" id="o-mid">$0</span></div>
+        <button class="btn" id="w-connect" type="button">Connect wallet</button>
+        <p class="wmsg" id="w-msg"></p>
+        <div id="w-panel" hidden>
+          <div class="calc-out">
+            <div><span class="k">Your JUNO</span><span class="v" id="w-bal">–</span></div>
+            <div><span class="k">You burned</span><span class="v" id="w-burned">–</span></div>
+            <div><span class="k">Your share of burns</span><span class="v" id="w-share">–</span></div>
+            <div><span class="k">Claimable</span><span class="v" id="w-pending">–</span></div>
+            <div><span class="k">Pot waiting</span><span class="v" id="w-pot">–</span></div>
+            <div><span class="k">Released so far</span><span class="v" id="w-released">–</span></div>
+          </div>
+          <div class="wrow">
+            <input type="number" id="w-amount" placeholder="JUNO to burn" min="0" step="any">
+            <button class="btn" id="w-burn" type="button" disabled>Burn</button>
+          </div>
+          <div class="wrow">
+            <button class="btn ghost" id="w-claim" type="button" disabled>Claim rewards</button>
+          </div>
         </div>
-      </form>
+      </div>
     </div>
+    <div class="sec-head" style="margin-top:96px">
+      <h3>Model it</h3>
+      <p class="sub">Numbers you type, not numbers from the chain.</p>
+    </div>
+    <form class="calc calc-wide" id="calc" onsubmit="return false">
+      <label>JUNO you burn<input type="number" id="c-hold" value="1000000" min="0" step="1000"></label>
+      <label>JUNO burned by everyone<input type="number" id="c-supply" value="50000000" min="1" step="1000000"></label>
+      <label>Pot size, BNB<input type="number" id="c-pot" value="20" min="0" step="1"></label>
+      <label>Next entry weight<select id="c-w"><option>1</option><option>2</option><option selected>3</option><option>4</option><option>5</option></select></label>
+      <div class="calc-out">
+        <div><span class="k">Slice released</span><span class="v" id="o-slice">0%</span></div>
+        <div><span class="k">Your share of it</span><span class="v" id="o-mine">0</span></div>
+        <div><span class="k">Same entry, at 23:59:00</span><span class="v" id="o-late">0</span></div>
+        <div><span class="k">Your share at midnight</span><span class="v" id="o-mid">0</span></div>
+      </div>
+    </form>
   </div>
 </section>
 
@@ -58,6 +84,8 @@
   <div class="wrap prose">
     <h2>Questions</h2>
     <dl class="faq">
+      <dt>Why burn instead of stake?</dt>
+      <dd>Staking can be undone, so it says nothing. Burning is a bet you cannot walk back. It also shrinks supply for everyone still holding, which is the other half of the wager.</dd>
       <dt>Is this cheering for things to go wrong?</dt>
       <dd>No. It is a way to be paid for being right about the evidence when the labs' own reports say what they say. The clock only moves on documented events. If the next year of system cards is boring, the clock sits still and the pot sits with it.</dd>
       <dt>Who decides the weight?</dt>
@@ -83,5 +111,6 @@
 </footer>
 
 <script src="app.js"></script>
+<script type="module" src="wager.js"></script>
 </body>
 </html>

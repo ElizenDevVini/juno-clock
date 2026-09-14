@@ -151,3 +151,14 @@ body::before{content:"";position:fixed;inset:0;z-index:20;pointer-events:none;op
 .reading{font-size:13px;color:var(--muted);text-align:center;margin:-40px 0 48px}
 .reading b{font-family:var(--display);font-weight:400;font-size:1.2rem;color:var(--ink);letter-spacing:.02em}
 .nav .links a.on::after{transform:scaleX(1)}
+
+/* wallet panel */
+.wallet{border-top:2px solid var(--ink);padding-top:20px;position:relative}
+button{font:inherit}
+.wmsg{font-size:13px;color:var(--muted);min-height:1.4em;margin:12px 0 0}
+.wrow{display:flex;gap:12px;margin-top:16px}
+.wrow input{flex:1;font:inherit;padding:10px 12px;border:1px solid var(--ink);background:transparent;color:var(--ink);border-radius:0;min-width:0}
+.btn:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--ink)}
+.calc-wide{max-width:720px;margin:0 auto}
+.calc-wide label{grid-template-columns:1.2fr 1fr}

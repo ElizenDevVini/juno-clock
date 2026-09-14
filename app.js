@@ -88,7 +88,7 @@ function calc(secsLeft) {
   const share = Math.min(1, hold / supply);
   const slice = Math.min(1, (w * PER_POINT) / secsLeft);
   const late = Math.min(1, (w * PER_POINT) / 60);
-  const usd = (n) => '$' + n.toLocaleString('en-US', { maximumFractionDigits: 2 });
+  const usd = (n) => n.toLocaleString('en-US', { maximumFractionDigits: 4 }) + ' BNB';
   $('#o-slice').textContent = (slice * 100).toFixed(1) + '%';
   $('#o-mine').textContent = usd(pot * slice * share);
   $('#o-late').textContent = usd(pot * late * share);
