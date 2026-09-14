@@ -23,7 +23,7 @@ contract JunoClockTest is Test {
 
     function setUp() public {
         token = new Token();
-        clock = new JunoClock(token, keeper);
+        clock = new JunoClock(token, keeper, 0);
         token.mint(a, 1000e18); token.mint(b, 1000e18);
         vm.prank(a); token.approve(address(clock), type(uint256).max);
         vm.prank(b); token.approve(address(clock), type(uint256).max);
@@ -101,6 +101,13 @@ contract JunoClockTest is Test {
         vm.prank(keeper); clock.advance(4);
         assertEq(clock.pot(), 1 ether);
         assertEq(clock.score(), 4);
+    }
+
+    function testStartsAtRecordScore() public {
+        JunoClock c = new JunoClock(token, keeper, 52);
+        assertEq(c.secondsLeft(), 240);
+        vm.expectRevert(JunoClock.Midnight.selector);
+        new JunoClock(token, keeper, 60);
     }
 
     function testOnlyKeeperAdvances() public {

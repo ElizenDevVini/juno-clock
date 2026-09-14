@@ -37,9 +37,12 @@ contract JunoClock {
     error BadWeight();
     error Zero();
 
-    constructor(IERC20 token, address keeper_) {
+    /// initialScore lets the chain start where the public record already is.
+    constructor(IERC20 token, address keeper_, uint256 initialScore) {
+        if (initialScore >= MIDNIGHT) revert Midnight();
         juno = token;
         keeper = keeper_;
+        score = initialScore;
     }
 
     receive() external payable {
